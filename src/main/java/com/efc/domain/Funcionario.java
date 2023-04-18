@@ -1,6 +1,5 @@
 package com.efc.domain;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
@@ -20,7 +19,7 @@ public class Funcionario extends AbstractEntity<Long> {
 	private String nome;
 	
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal salario;
+	private Double salario;
 	
     @Column(name = "data_entrada", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataEntrada;
@@ -44,11 +43,11 @@ public class Funcionario extends AbstractEntity<Long> {
 		this.nome = nome;
 	}
 
-	public BigDecimal getSalario() {
+	public Double getSalario() {
 		return salario;
 	}
 
-	public void setSalario(BigDecimal salario) {
+	public void setSalario(Double salario) {
 		this.salario = salario;
 	}
 
