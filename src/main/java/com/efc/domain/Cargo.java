@@ -1,9 +1,12 @@
 package com.efc.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @SuppressWarnings("serial")
@@ -18,6 +21,9 @@ public class Cargo extends AbstractEntity<Long> {
 	@JoinColumn(name = "id_departamento_fk")
 	private Departamento departamento;
 
+	@OneToMany(mappedBy = "cargo") //mappedBy -> lado fraco: cargo, lado forte: funcionario -> contém fk
+	private List<Funcionario> funcionarios;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -32,6 +38,14 @@ public class Cargo extends AbstractEntity<Long> {
 
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
+	}
+
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 	
 	
