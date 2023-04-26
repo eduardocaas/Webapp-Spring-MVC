@@ -52,6 +52,18 @@
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	    
+	    var url = '';
+	    
+	    /*-------MODAL DELETE-------*/
+	    $('button[id*="btn_"]').click(function() {
+			url = "http://localhost:8080/" + $(this).attr("id").split("_")[1]; // Split divide no meio [0] -> btn, [1] -> dep../exc../3 (exemplo) 
+		});
+		
+		$('#ok_confirm').click(function(){
+			document.location.href = url;
+		});
+		/*-------------------------*/
+	    
 		$(function() {
 			$('[data-toggle="popover"]').popover();
 		});
