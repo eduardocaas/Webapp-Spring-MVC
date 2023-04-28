@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,10 +44,26 @@ public class CargoController {
 		return "redirect:/cargos/cadastrar";
 	}
 	
+	@GetMapping("/editar/{id}")
+	public String preEditar(@PathVariable("id") Long id, ModelMap model) { // Traz os campos pra editar
+		model.addAttribute("cargo", cargoService.findById(id));
+		return "cargo/cadastro";
+	}
+	
+	@PostMapping("/editar")
+	public String editar(Cargo cargo, RedirectAttributes attr) {
+		cargoService.update(cargo);
+		attr.addFlashAttribute("success", "Cargo atualizado com sucesso.");
+		return "redirect:/cargos/listar";
+	}
+	
+	
 	@ModelAttribute("departamentos") // Injeta os departamentos no model departamentos -> pode ser visto em cadastro.html (Cargo)
 	public List<Departamento> listaDepartamentos(){
 		return departamentoService.findAll();
 	}
+	
+	
 	
 	
 	
