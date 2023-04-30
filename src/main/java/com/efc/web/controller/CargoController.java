@@ -57,6 +57,18 @@ public class CargoController {
 		return "redirect:/cargos/listar";
 	}
 	
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
+		if(cargoService.cargoFuncionarios(id)) {
+			attr.addFlashAttribute("fail", "Cargo não removido. Tem funcionário(s) vinculado(s).");
+		}
+		else {
+			cargoService.delete(id);
+			attr.addFlashAttribute("success", "Cargo removido com sucesso.");
+		}
+		return "redirect:/cargos/listar";
+	}
+	
 	
 	@ModelAttribute("departamentos") // Injeta os departamentos no model departamentos -> pode ser visto em cadastro.html (Cargo)
 	public List<Departamento> listaDepartamentos(){
