@@ -116,13 +116,21 @@
 	                    <tr th:each="f : ${funcionarios}">
 	                        <td th:text="${f.id}"></td>
 	                        <td th:text="${f.nome}"></td>
-	                        <td th:text="${f.salario}"></td>
-	                        <td th:text="${f.cargo.departamento}"></td>
+	                        <td th:text="|R$ ${{f.salario}}|"></td> <!-- Duas chaves - informa formatação no Thymeleaf conforme Locate do Servidor -> ex: Brasil, "| |" -> Concatena string -->
+	                        <td th:text="${f.cargo.departamento.nome}"></td>
 	                        <td th:text="${f.cargo.nome}"></td>
 	                        <td>
 	                            <button type="button" class="btn btn-secondary btn-sm" data-container="body"
-	                                    data-toggle="popover" data-placement="top"
-	                                    data-content="Av. dos Palmares, 320  - Ribeirão, Canoas - RS - 98050-908">
+	                                    data-toggle="popover" data-placement="right"  data-trigger="focus" 
+	                                    th:attr="data-content=${#strings.concat(
+	                                    	f.endereco.logradouro, ', ',
+	                                    	f.endereco.numero, ' ',
+	                                    	f.endereco.complemento, ' - ',
+	                                    	f.endereco.bairro, ', ',
+	                                    	f.endereco.cidade, ' - ',
+	                                    	f.endereco.uf.sigla, ' - ',
+	                                    	f.endereco.cep
+	                                    )}">
 	                                <span class="oi oi-eye" title="Visualizar" aria-hidden="true"></span>
 	                            </button>
 	                        </td>
