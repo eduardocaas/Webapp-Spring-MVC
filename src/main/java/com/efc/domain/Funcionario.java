@@ -2,6 +2,9 @@ package com.efc.domain;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,6 +21,7 @@ public class Funcionario extends AbstractEntity<Long> {
 	@Column(nullable = false, unique = true)
 	private String nome;
 	
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")  // Estilo do número -> moeda, Máscara -> US
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double salario;
 	

@@ -62,11 +62,17 @@
 		$('#ok_confirm').click(function(){
 			document.location.href = url;
 		});
-		/*-------------------------*/
+		/*--------------------------*/
 	    
+	    /*-------POPOVER - ENDEREÇO -------*/
 		$(function() {
 			$('[data-toggle="popover"]').popover();
 		});
+		
+		$('.popover-dismiss').popover({
+  			trigger: 'focus'
+		});
+		/*--------------------------*/
 		
 		$(document).ready(function(){
 			
